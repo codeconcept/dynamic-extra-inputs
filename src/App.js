@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Input from "./components/Input";
 
 function App() {
+  const [nbInputs, setNbInputs] = useState([Date.now()]);
+
+  const addInput = () => {
+    setNbInputs(nbInputs.concat([Date.now()]));
+  };
+
+  const isLast = index => {
+    return nbInputs.length === ++index;
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {nbInputs.map((nb, index) => (
+        <Input key={nb} isLast={isLast(index)} />
+      ))}
+      <br />
+      <button onClick={addInput}>+</button>
     </div>
   );
 }
