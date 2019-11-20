@@ -15,23 +15,14 @@ const Input = ({ isLast, id, handleBlur }) => {
 
   return (
     <>
-      {isLast ? (
-        <input
-          type="text"
-          id={id}
-          ref={lastInput}
-          value={text}
-          onChange={handleChange}
-          onBlur={() => handleBlur({ id, value: text })}
-        />
-      ) : (
-        <input
-          type="text"
-          value={text}
-          onChange={handleChange}
-          onBlur={() => handleBlur({ id, value: text })}
-        />
-      )}
+      <input
+        type="text"
+        id={id}
+        ref={isLast ? lastInput : undefined}
+        value={text}
+        onChange={handleChange}
+        onBlur={() => handleBlur({ id, value: text })}
+      />
       <br />
     </>
   );
